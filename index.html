@@ -1,2 +1,268 @@
-ciao mamma
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calogero Friscia – iOS Developer</title>
+
+  <style>
+    :root {
+      --text: #1c1c1e;
+      --muted: #6e6e73;
+      --accent: #007aff;
+      --bg: #ffffff;
+      --section-gap: 4rem;
+      --max-width: 820px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                   "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.25;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.3rem;
+    }
+
+    p {
+      margin: 0.4rem 0 1rem;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    section {
+      margin-bottom: var(--section-gap);
+    }
+
+    .hero {
+      margin-bottom: 5rem;
+    }
+
+    .role {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .stack {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .project {
+      margin-bottom: 2.5rem;
+    }
+
+    .project ul {
+      padding-left: 1.2rem;
+      margin: 0.5rem 0 0;
+    }
+
+    .project li {
+      margin-bottom: 0.3rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+    }
+
+    .brand {
+  display: flex;
+  align-items: center;
+  font-size: clamp(2.6rem, 6vw, 5.2rem); /* 👈 SCALA TUTTO */
+  gap: 7px;
+}
+
+.brand img {
+  height: 0.8em;
+  width: auto;
+  object-fit: contain;
+  border-radius: 5px;
+  transform: translateY(2px);
+}
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Calogero Friscia</h1>
+      <p class="role">iOS Developer</p>
+      <p class="stack">
+        Swift · SwiftUI · iOS Frameworks
+      </p>
+    </section>
+
+    <!-- APPROACH -->
+    <section>
+      <h2>Approach</h2>
+      <p>
+        The projects presented here were developed end-to-end by me — from concept
+        and design to implementation, testing, and release.
+      </p>
+      <p>
+        I’m equally comfortable working independently or contributing as part of a team,
+        and I look forward to collaborating on shared projects in the future.
+      </p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section>
+      <h2>Selected Projects</h2>
+
+      <!-- TuneUp -->
+      <div class="project">
+        <div class="brand">
+        <img src="assets/img/tuneLogo.png" alt="TuneUp! logo" />
+        <h3>TuneUp! Music Alarm</h3>
+      </div>
+        <p class="muted">
+          Music-based alarm and focus app · Available on the App Store
+        </p>
+        <ul>
+          <li>Integrated MusicKit</li>
+          <li>Integrated AlarmKit</li>
+          <li>In-app purchases with StoreKit</li>
+          <li>Multilingual localization</li>
+        </ul>
+        <p>
+          <a href="https://apps.apple.com/app/apple-store/id6754902021?pt=123477141&ct=website&mt=8" target="_blank">
+            App Store →
+          </a>
+        </p>
+      </div>
+
+      <!-- Flip Flop Poker -->
+      <div class="project">
+         <div class="brand">
+        <img src="assets/img/pokerLogo.png" alt="TuneUp! logo" />
+        <h3>Flip Flop Poker <span class="muted">(formerly Play the Nuts)</span></h3>
+         </div>
+        <p class="muted">
+          Single-player iOS game inspired by Texas Hold’em · Available on the App Store
+        </p>
+        <ul>
+          <li>Custom poker hand evaluation algorithm</li>
+          <li>Game Center integration</li>
+          <li>AdMob monetization</li>
+          <li>Multilingual localization</li>
+        </ul>
+        <p>
+          <a href="https://apps.apple.com/it/app/get-the-nut-in-60/id1593070140?l=en-GB" target="_blank">
+            App Store →
+          </a>
+        </p>
+      </div>
+
+      <!-- HosterFlow -->
+      <div class="project">
+         <div class="brand">
+        <img src="assets/img/hosterLogo.png" alt="TuneUp! logo" />
+        <h3>HosterFlow!</h3>
+         </div>
+        <p class="muted">
+          Management app for B&B and short-term rental hosts · No longer available on the App Store
+        </p>
+        <ul>
+          <li>Firebase authentication and real-time database</li>
+          <li>In-app purchases with StoreKit</li>
+          <li>Modular architecture with reusable components</li>
+        </ul>
+      </div>
+
+      <!-- Fantabid -->
+      <div class="project">
+         <div class="brand">
+        <img src="assets/img/fantabidLogo.png" alt="TuneUp! logo" />
+        <h3>Fantabid</h3>
+         </div>
+        <p class="muted">
+          First full-stack iOS app · Learning project · No longer available on the App Store
+        </p>
+        <ul>
+          <li>Local data persistence</li>
+          <li>Remote JSON data handling</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- ABOUT -->
+    <section>
+      <h2>About</h2>
+      <p>
+        iOS developer focused on building clean, reliable apps with strong attention to UX
+        and long-term maintainability.
+      </p>
+      <p>
+        Experience across personal and indie projects, from concept to App Store release.
+      </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+       <!-- <a href="https://github.com/lf51" target="_blank">GitHub</a> · -->
+        <a href="https://linkedin.com/in/lillofree" target="_blank">LinkedIn</a>
+      </p>
+    </footer>
+
+  </main>
+</body>
+</html>
+
 
