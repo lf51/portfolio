@@ -3,99 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TuneUp! – 隐私政策</title>
+  <title>Unison – 隐私政策</title>
   <meta name="robots" content="noindex">
-<link rel="stylesheet" href="../../style/legal-style.css">
+  <link rel="stylesheet" href="../../style/legal-style.css">
 </head>
+
 <body>
+  <main class="container">
+    <h1>隐私政策</h1>
 
-<main class="container">
-  <h1>隐私政策</h1>
-
-  <p class="intro">
-    <em>最后更新: 22.11.2025</em><br>
-    感谢您使用 TuneUp! 您的隐私对我们非常重要。本隐私政策说明了应用如何处理您的信息。TuneUp! 不会向开发者或第三方收集、存储或共享任何个人数据。所有数据都安全地存储在您的设备上。
-  </p>
-
-  <section>
-    <h2>1. 本地存储数据</h2>
-    <p>TuneUp! 使用 SwiftData、Keychain 和 UserDefaults 将信息仅存储在您的设备上：</p>
-    <ul>
-      <li><strong>SwiftData:</strong> 用于存储用户创建的闹钟配置；</li>
-      <li><strong>Keychain:</strong> 用于存储一个与试用期状态相关的标记；</li>
-      <li><strong>UserDefaults:</strong> 用于存储两个标记，以决定是否显示辅助视图和启动页面。</li>
-    </ul>
-    <p>不会存储或传输任何个人数据或可识别信息至您的设备之外。</p>
-  </section>
-
-  <section>
-    <h2>2. Apple Music 访问权限</h2>
-    <p>TuneUp! 需要访问您的 Apple Music 媒体库以提供核心功能。应用程序将：</p>
-    <ul>
-      <li>请求访问您的音乐资料库；</li>
-      <li>不会访问您的播放历史、账户信息或流媒体数据；</li>
-      <li>不会与 Apple 或任何第三方共享数据（除 Apple MusicKit 框架自动处理的范围外）。</li>
-    </ul>
-    <p>更多信息请参阅 Apple 的相关政策：
-      <a href="https://www.apple.com/legal/internet-services/itunes/us/terms.html" target="_blank">Apple Media Service</a>, 
-      <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple Privacy Policy</a>
+    <p class="intro">
+      <em>最后更新日期：03.02.2026</em><br>
+      感谢您使用 Unison。您的隐私对我们非常重要。
+      本隐私政策说明本应用如何处理信息。
+      Unison 不会向开发者或任何第三方收集、存储或共享任何个人数据。
+      所有数据仅保存在您的设备上，并仅在本地网络内进行处理。
     </p>
-  </section>
 
-  <section>
-    <h2>3. AlarmKit 的使用</h2>
-    <p>TuneUp! 使用 AlarmKit 创建和管理闹钟。这些闹钟通过 SwiftData 保存在您的设备上，不会被传输到任何外部服务器。</p>
-  </section>
+    <section>
+      <h2>1. 本地网络通信</h2>
+      <p>
+        Unison 使用 Apple 的 Multipeer Connectivity 框架连接附近的设备。
+        所有通信仅在本地网络中进行，用于在设备之间协调视频录制和传输。
+      </p>
+      <p>
+        不会将任何数据发送到外部服务器，
+        使用这些功能也不需要互联网连接。
+      </p>
+    </section>
 
-  <section>
-    <h2>4. 通知</h2>
-    <p>TuneUp! 使用本地通知提醒您闹钟或计划的操作。本应用不使用推送通知，也不依赖任何外部服务器。</p>
-  </section>
+    <section>
+      <h2>2. 本地存储的数据</h2>
+      <p>Unison 通过 UserDefaults 在您的设备上本地存储有限的数据：</p>
+      <ul>
+        <li>
+          <strong>受信任设备列表：</strong>
+          记录用户已授权的设备，
+          以避免在后续使用中重复请求权限。
+        </li>
+      </ul>
+      <p>
+        用户可随时在应用设置中重置该列表。
+        这些设备不关联任何个人信息或可识别身份的数据。
+      </p>
+    </section>
 
-  <section>
-    <h2>5. 订阅与试用</h2>
-    <p>TuneUp! 提供试用期，之后需通过 App Store 管理的订阅继续使用。所有支付和订阅流程均由 Apple 处理。TuneUp! 无法访问您的付款信息或 Apple ID。</p>
-    <p>更多信息请参阅 <a href="https://www.apple.com/legal/internet-services/itunes/us/terms.html" target="_blank">App Store 条款</a>。</p>
-  </section>
+    <section>
+      <h2>3. 媒体处理</h2>
+      <p>
+        根据分配的角色（Master 或 Node），
+        Unison 可以录制视频并在设备之间传输媒体文件。
+      </p>
+      <ul>
+        <li>视频仅保存在接收设备本地；</li>
+        <li>媒体内容不会被发送、分析或共享到外部；</li>
+        <li>所有传输均在本地网络内直接完成。</li>
+      </ul>
+    </section>
 
-  <section>
-    <h2>6. 第三方服务</h2>
-    <p>TuneUp! 不整合广告 SDK、分析工具或任何外部跟踪系统。</p>
-  </section>
+    <section>
+      <h2>4. 权限请求</h2>
+      <p>
+        Unison 可能会请求访问相机、麦克风、本地网络和媒体资料库，
+        以实现其核心功能。
+      </p>
+      <p>
+        应用不会访问或收集任何超出其正常运行所必需的数据。
+      </p>
+    </section>
 
-  <section>
-    <h2>7. 数据保留与删除</h2>
-    <p>应用内创建的所有数据（闹钟、偏好设置、标记等）均存储在您的设备中。删除应用将永久删除所有存储的数据。</p>
-  </section>
+    <section>
+      <h2>5. 身份验证与账户</h2>
+      <p>
+        Unison 不使用任何身份验证系统、用户账户或身份服务。
+        使用本应用无需登录。
+      </p>
+    </section>
 
-  <section>
-    <h2>8. 儿童隐私</h2>
-    <p>本应用面向普通用户，不会故意收集儿童的个人数据。</p>
-  </section>
+    <section>
+      <h2>6. 付费与订阅</h2>
+      <p>
+        Unison 完全免费使用。
+        不包含订阅、应用内购买或任何支付系统。
+      </p>
+    </section>
 
-  <section>
-    <h2>9. 隐私政策的变更</h2>
-    <p>我们可能会不时更新本隐私政策。任何更改将会在应用中公布，并附上最新的“最后更新日期”。</p>
-  </section>
+    <section>
+      <h2>7. 第三方</h2>
+      <p>
+        Unison 未集成任何广告 SDK、分析工具、
+        跟踪系统或第三方服务。
+      </p>
+    </section>
 
-  <section>
-    <h2>10. 联系我们</h2>
-    <p>如果您对本隐私政策有任何疑问，请通过 <a href="../contact/contactForm.html">开发团队联系</a>。</p>
-    <p>使用 TuneUp! 即表示您同意本隐私政策中所述的条款。</p>
-  </section>
+    <section>
+      <h2>8. 数据保留与删除</h2>
+      <p>
+        Unison 处理的所有数据
+        （视频及受信任设备列表）
+        均存储在您的设备上。
+        删除应用将永久删除所有本地存储的数据。
+      </p>
+    </section>
 
-   <footer>
-    <p>
-    <a href="../../index.html">Home</a> | 
-    <a href="privacyIndex.html">Privacy Policy</a> | 
-    <a href="../terms/termsIndex.html">Terms of Service</a>
-  </p>
-  <p>© TuneUp! — 版权所有</p>
-  
-</footer>
+    <section>
+      <h2>9. 儿童隐私</h2>
+      <p>
+        本应用适用于普通用户，
+        不会故意收集儿童的个人数据。
+      </p>
+    </section>
 
-</main>
+    <section>
+      <h2>10. 本隐私政策的变更</h2>
+      <p>
+        本隐私政策可能会不时更新。
+        任何更改都将反映在本文件中，
+        并更新“最后更新日期”。
+      </p>
+    </section>
 
+    <section>
+      <h2>11. 联系我们</h2>
+      <p>
+        如您对本隐私政策有任何疑问，
+        请联系 <a href="../contact/contactForm.html">开发团队</a>。
+      </p>
+      <p>
+        使用 Unison 即表示您同意本隐私政策中所述的条款。
+      </p>
+    </section>
+
+    <footer>
+      <p>
+        <a href="../../index.html">主页</a> |
+        <a href="privacyIndex.html">隐私政策</a> |
+        <a href="../terms/termsIndex.html">服务条款</a>
+      </p>
+      <p>© Unison — 保留所有权利</p>
+    </footer>
+  </main>
 </body>
 </html>
-

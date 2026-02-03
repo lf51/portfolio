@@ -3,98 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TuneUp! – Politique de Confidentialité</title>
+  <title>Unison – Politique de confidentialité</title>
   <meta name="robots" content="noindex">
- <link rel="stylesheet" href="../../style/legal-style.css">
+  <link rel="stylesheet" href="../../style/legal-style.css">
 </head>
+
 <body>
+  <main class="container">
+    <h1>Politique de confidentialité</h1>
 
-<main class="container">
-  <h1>Politique de Confidentialité</h1>
-
-  <p class="intro">
-    <em>Dernière mise à jour : 22.11.2025</em><br>
-    Merci d’utiliser TuneUp! Votre vie privée est importante pour nous. Cette Politique de Confidentialité explique comment l’application gère vos informations. TuneUp! ne collecte, n’enregistre ni ne partage de données personnelles avec le développeur ou des tiers. Toutes les données restent stockées en toute sécurité sur votre appareil.
-  </p>
-
-  <section>
-    <h2>1. Données stockées localement</h2>
-    <p>TuneUp! utilise SwiftData, Keychain et UserDefaults pour stocker des informations exclusivement sur votre appareil :</p>
-    <ul>
-      <li><strong>SwiftData :</strong> Enregistre les configurations d’alarmes créées par l’utilisateur.</li>
-      <li><strong>Keychain :</strong> Stocke un seul indicateur lié à l’état de la période d’essai.</li>
-      <li><strong>UserDefaults :</strong> Stocke deux indicateurs permettant d’afficher ou non l’écran d’aide et l’écran d’accueil.</li>
-    </ul>
-    <p>Aucune donnée personnelle ou identifiable n’est enregistrée ou transmise en dehors de votre appareil.</p>
-  </section>
-
-  <section>
-    <h2>2. Accès à Apple Music</h2>
-    <p>TuneUp! demande l’accès à votre bibliothèque Apple Music afin d’assurer son fonctionnement principal. L’App :</p>
-    <ul>
-      <li>Demande l’autorisation d’accéder à votre bibliothèque musicale ;</li>
-      <li>N’accède pas à votre historique de lecture, à vos informations de compte ou à vos données de streaming ;</li>
-      <li>Ne partage aucune donnée avec Apple ou des tiers au-delà de ce qui est géré automatiquement par le framework MusicKit d’Apple.</li>
-    </ul>
-    <p>Pour plus d’informations, veuillez consulter les politiques d’Apple : 
-      <a href="https://www.apple.com/legal/internet-services/itunes/us/terms.html" target="_blank">Apple Media Service</a>, 
-      <a href="https://www.apple.com/legal/privacy/fr-ww/" target="_blank">Apple Privacy Policy</a>
+    <p class="intro">
+      <em>Dernière mise à jour : 03.02.2026</em><br>
+      Merci d’utiliser Unison. Le respect de votre vie privée est important pour nous.
+      Cette politique de confidentialité explique comment l’application traite les informations.
+      Unison ne collecte, ne stocke et ne partage aucune donnée personnelle avec le développeur ou des tiers.
+      Toutes les données sont traitées exclusivement sur votre appareil et au sein de votre réseau local.
     </p>
-  </section>
 
-  <section>
-    <h2>3. Utilisation d’AlarmKit</h2>
-    <p>TuneUp! utilise AlarmKit pour créer et gérer les alarmes. Ces alarmes sont stockées localement sur votre appareil via SwiftData. Aucune donnée liée aux alarmes n’est transmise à l’extérieur.</p>
-  </section>
+    <section>
+      <h2>1. Communication sur le réseau local</h2>
+      <p>
+        Unison connecte les appareils à proximité via le framework Multipeer Connectivity d’Apple.
+        Cette communication s’effectue uniquement sur le réseau local et permet de coordonner l’enregistrement
+        ainsi que le transfert de vidéos entre appareils.
+      </p>
+      <p>
+        Aucune donnée n’est envoyée vers des serveurs externes et aucune connexion Internet n’est requise pour ces fonctionnalités.
+      </p>
+    </section>
 
-  <section>
-    <h2>4. Notifications</h2>
-    <p>TuneUp! utilise des notifications locales pour vous rappeler vos alarmes ou actions programmées. Aucune notification push ni serveur externe n’est utilisé.</p>
-  </section>
+    <section>
+      <h2>2. Données stockées localement</h2>
+      <p>Unison stocke une quantité limitée de données localement sur votre appareil à l’aide de UserDefaults :</p>
+      <ul>
+        <li>
+          <strong>Liste des appareils de confiance :</strong> une liste d’appareils précédemment autorisés par l’utilisateur
+          afin d’éviter des demandes d’autorisation répétées.
+        </li>
+      </ul>
+      <p>
+        Cette liste peut être réinitialisée à tout moment depuis les réglages de l’application.
+        Aucune information personnelle ou identifiable n’est associée à ces appareils.
+      </p>
+    </section>
 
-  <section>
-    <h2>5. Abonnement et période d’essai</h2>
-    <p>TuneUp! propose une période d’essai suivie d’un abonnement entièrement géré par l’App Store. Tous les paiements et processus d’abonnement sont administrés par Apple. TuneUp! n’a pas accès à vos informations de paiement ni à votre identifiant Apple.</p>
-    <p>Pour plus d’informations, consultez les <a href="https://www.apple.com/legal/internet-services/itunes/us/terms.html" target="_blank">conditions de l’App Store</a>.</p>
-  </section>
+    <section>
+      <h2>3. Gestion des médias</h2>
+      <p>
+        Selon le rôle attribué (Master ou Node), Unison peut enregistrer des vidéos
+        et transférer des fichiers multimédias entre appareils.
+      </p>
+      <ul>
+        <li>Les vidéos sont enregistrées localement sur l’appareil récepteur ;</li>
+        <li>Les contenus multimédias ne sont ni téléchargés, ni analysés, ni partagés à l’extérieur ;</li>
+        <li>Tous les transferts s’effectuent directement entre appareils sur le réseau local.</li>
+      </ul>
+    </section>
 
-  <section>
-    <h2>6. Services tiers</h2>
-    <p>TuneUp! n’intègre aucun SDK publicitaire, outil d’analyse ou système de suivi externe.</p>
-  </section>
+    <section>
+      <h2>4. Autorisations</h2>
+      <p>
+        Unison peut demander l’accès à la caméra, au microphone, au réseau local et à la bibliothèque multimédia
+        afin d’assurer le bon fonctionnement de ses fonctionnalités principales.
+      </p>
+      <p>
+        Unison n’accède pas à des données et ne collecte pas d’informations au-delà de ce qui est strictement nécessaire
+        au fonctionnement de l’application.
+      </p>
+    </section>
 
-  <section>
-    <h2>7. Conservation et suppression des données</h2>
-    <p>Toutes les données créées au sein de l’application (alarmes, préférences, indicateurs) restent sur votre appareil et peuvent être supprimées en désinstallant l’app. La suppression de TuneUp! efface définitivement toutes les données stockées.</p>
-  </section>
+    <section>
+      <h2>5. Authentification et comptes</h2>
+      <p>
+        Unison n’utilise aucun système d’authentification, aucun compte utilisateur ni aucun service d’identité.
+        Aucune connexion n’est requise pour utiliser l’application.
+      </p>
+    </section>
 
-  <section>
-    <h2>8. Confidentialité des enfants</h2>
-    <p>L’application s’adresse à un public général et ne collecte pas sciemment de données personnelles auprès des enfants.</p>
-  </section>
+    <section>
+      <h2>6. Paiements et abonnements</h2>
+      <p>
+        Unison est entièrement gratuite.
+        Il n’existe aucun abonnement, aucun achat intégré ni aucun système de paiement.
+      </p>
+    </section>
 
-  <section>
-    <h2>9. Modifications de cette politique</h2>
-    <p>Nous pouvons mettre à jour cette Politique de Confidentialité périodiquement. Toute modification sera publiée dans l’application avec une nouvelle date de « Dernière mise à jour ».</p>
-  </section>
+    <section>
+      <h2>7. Tiers</h2>
+      <p>
+        Unison n’intègre aucun SDK publicitaire, outil d’analyse, système de suivi ou service tiers.
+      </p>
+    </section>
 
-  <section>
-    <h2>10. Contact</h2>
-    <p>Pour toute question concernant cette Politique de Confidentialité, veuillez <a href="../contact/contactForm.html">contacter l’équipe de développement</a>.</p>
-    <p>En utilisant TuneUp!, vous acceptez les termes énoncés dans cette Politique de confidentialité.</p>
-  </section>
+    <section>
+      <h2>8. Conservation et suppression des données</h2>
+      <p>
+        Toutes les données traitées par Unison (vidéos et liste des appareils de confiance) restent sur votre appareil.
+        La suppression de l’application entraîne l’effacement définitif de toutes les données stockées localement.
+      </p>
+    </section>
 
-     <footer>
-    <p>
-    <a href="../../index.html">Home</a> | 
-    <a href="privacyIndex.html">Privacy Policy</a> | 
-    <a href="../terms/termsIndex.html">Terms of Service</a>
-  </p>
-  <p>© TuneUp! — Tous droits réservés</p>
-  
-</footer>
+    <section>
+      <h2>9. Protection de la vie privée des enfants</h2>
+      <p>
+        L’application est destinée à un public général et ne collecte pas sciemment de données personnelles concernant des enfants.
+      </p>
+    </section>
 
-</main>
+    <section>
+      <h2>10. Modifications de cette politique de confidentialité</h2>
+      <p>
+        Cette politique de confidentialité peut être mise à jour occasionnellement.
+        Toute modification sera reflétée dans ce document avec une nouvelle date de « Dernière mise à jour ».
+      </p>
+    </section>
 
+    <section>
+      <h2>11. Contact</h2>
+      <p>
+        Pour toute question concernant cette politique de confidentialité, veuillez contacter
+        <a href="../contact/contactForm.html">l’équipe de développement</a>.
+      </p>
+      <p>
+        En utilisant Unison, vous acceptez les conditions décrites dans cette politique de confidentialité.
+      </p>
+    </section>
+
+    <footer>
+      <p>
+        <a href="../../index.html">Accueil</a> |
+        <a href="privacyIndex.html">Politique de confidentialité</a> |
+        <a href="../terms/termsIndex.html">Conditions d’utilisation</a>
+      </p>
+      <p>© Unison — Tous droits réservés</p>
+    </footer>
+  </main>
 </body>
 </html>
