@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Unison – Multi Device Video</title>
+ <meta name="description" content="Turn multiple Apple devices into a synchronized multi-angle camera setup, controlled from one place.">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --secondary: #666666;
+      --border: #eaeaea;
+      --accent: #007aff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 80px 24px 60px;
+      text-align: center;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    header p {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      max-width: 720px;
+      margin: 0 auto 32px;
+      font-style: italic;
+    }
+
+    .cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta a {
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+
+    .cta a.primary {
+      background-color: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .cta a:hover {
+      transform: translateY(-1px);
+    }
+
+    section {
+      padding: 80px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .feature {
+      text-align: center;
+    }
+
+.feature .placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  width: 100%;
+  height: 320px;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-radius: 16px;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.placeholder.bg-snooze {
+  background-image: url("assets/img/sfondoPlaceholder.jpeg");
+}
+
+.placeholder.bg-sleep {
+  background-image: url("assets/img/sfondoPlaceholderDark.jpeg");
+}
+
+.placeholder.bg-focus {
+  background-image: url("assets/img/sfondoPlaceholder2.jpeg");
+}
+
+
+
+    /* custom style*/
+ .feature .placeholder img {
+  max-height: 100%;
+  max-width: 45%;
+  object-fit: contain;
+  flex-shrink: 1;
+  z-index: 1;
+}
+
+
+
+    .feature h3 {
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .feature p {
+      color: var(--secondary);
+      font-size: 0.95rem;
+    }
+
+    .faq {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+
+    .faq-item h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .legal-links {
+      text-align: center;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .legal-links a {
+      color: #007AFF;          /* Apple system blue */
+       font-size: 0.9rem;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+.legal-links a:hover {
+  text-decoration: underline;
+}
+
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--secondary);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+    /* Modifiche di stile lf51 */
+.brand {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font-size: clamp(2.6rem, 6vw, 5.2rem); /* 👈 SCALA TUTTO */
+  gap: 7px;
+}
+
+.brand img {
+  height: 1em;
+  width: auto;
+  object-fit: contain;
+  transform: translateY(2px);
+}
+
+.brand h1 {
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.budgeApple img {
+ height: clamp(3.0rem, 6vw, 5.2rem);
+  width: auto;
+  object-fit: contain;
+  transform: translateY(2px);
+  
+}
+
+.budgeAppleBottom {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  
+}
+
+.budgeAppleBottom img {
+  height: clamp(3.0rem, 6vw, 5.2rem);
+  width: auto;
+  object-fit: contain;
+  transform: translateY(2px);
+  margin-top: 50px;
+}
+    
+.music-embed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.music-text {
+  max-width: 520px;
+  text-align: center;
+}
+.video-wrapper {
+  width: 100%;
+  max-width: 460px;
+}
+
+
+.video-wrapper video {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+}
+
+
+@media (max-width: 768px) {
+  .music-embed {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+}
+    
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO / PRODUCT HEADER -->
+  <header>
+    <!-- <h1>TuneUp!</h1> -->
+  <div class="brand">
+    <img src="assets/img/logoTrasparente.png" alt="Unison logo" />
+    <h1>Unison</h1>
+  </div>
+    <p>Turn multiple Apple devices into a synchronized multi-angle camera setup, controlled from one place.</p>
+
+    <!-- Modifiche lf51 -->
+<div class="budgeApple">
+  <a href="https://apps.apple.com/app/6756532053">
+    <img src="assets/img/appStore_badge.png" alt="Download on the App Store">
+  </a>
+
+</div>
+ <!-- Chiusa Modifiche lf51 -->
+    
+  </header>
+
+
+  <!-- PRODUCT OVERVIEW -->
+  <section>
+    <div class="container">
+      <h2>Built around your daily rhythm</h2>
+      <p style="text-align:center; color: var(--secondary); max-width:720px; margin:0 auto;">
+        Music that helps you shape your routines — from waking up to winding down and staying focused.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <h3>Snooze, reimagined with music</h3>
+          <p>Turn your morning snooze into sound.
+Instead of silence, your music gently takes over and helps you wake up your way.</p>
+          <div class="placeholder bg-snooze">
+             <img src="assets/img/newWakeUpScreen.png" alt="TuneUp! New Alarm View" />
+            <img src="assets/img/musicAlarm.png" alt="TuneUp! Music Alarm View" />
+          </div>
+          <!--<h3>Snooze with Music</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
+        </div>
+        <div class="feature">
+          <h3>Fall asleep with Music</h3>
+          <p>Let music guide you into sleep.
+Choose what you love and drift off naturally — with or without a timer.</p>
+          <div class="placeholder bg-sleep">
+            <img src="assets/img/musicLibraryScreen.png" alt="TuneUp! Music Library" />
+            <img src="assets/img/fallAsleepScreen.png" alt="TuneUp! Fall Asleep View" />
+
+          </div>
+          <!--<h3>Fall asleep with Music</h3>
+          <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+        </div>
+        <div class="feature">
+          <h3>Stay Focused or Relax</h3>
+          <p>Find your rhythm and stay present.
+Use music to focus or slow down, set a timer, and let the rest fade away.</p>
+          <div class="placeholder bg-focus">  
+            <img src="assets/img/focusScreen.png" alt="TuneUp! Focus View" />
+          </div>
+          
+          <!--<h3>Stay Focus or Relax </h3>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation.</p>-->
+        </div>
+       
+      </div>
+    </div>
+  </section>
+
+<!-- Video last Update-->
+
+<section>
+  <div class="music-embed">
+    <div class="music-text">
+      <h2>Discover the latest version of TuneUp!</h2>
+    </div>
+
+    <div class="video-wrapper">
+      <video
+        controls
+        preload="metadata"
+        poster="assets/video/tuneup-poster.jpg"
+      >
+        <source src="assets/video/appLastUpdate.MP4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</section>
+
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq">
+        <div class="faq-item">
+          <h4>What is TuneUp! ?</h4>
+          <p>TuneUp! is a music-based app that helps you use music more intentionally throughout your day.
+Instead of relying on a classic alarm or endless snoozing, TuneUp! lets you wake up with your favorite songs, helping you start the day in a more natural and pleasant way.
+You can also choose to receive optional reminders for when it’s time to go to bed, fall asleep with a preset sleep timer, or enter focus and relax modes using timed music sessions designed to match your moment.
+TuneUp! works seamlessly with Apple Music, so you can use the songs and playlists you already love, without managing yet another music library.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Does TuneUp! require Apple Music Subscription?</h4>
+          <p>TuneUp! requires access to the Apple Music library, but an active subscription is not strictly required.
+If you have an active Apple Music subscription, you can use your personal playlists, albums, and saved music directly inside TuneUp!.
+If you don’t have a subscription, you can still use TuneUp! with Apple Music’s free radio stations.
+TuneUp! adapts to your Apple Music access level, letting you use music in a more intentional way whether you’re subscribed or not.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Does TuneUp! require authentication?</h4>
+          <p>No. TuneUp! does not require you to create an account or sign in. The app only asks for permission to access your Apple Music account in order to play music and use Apple Music features. No additional authentication or user profile is required to use TuneUp!</p>
+        </div>
+<div class="faq-item">
+          <h4>Does TuneUp! collect or share personal data?</h4>
+          <p>No. TuneUp! does not collect, store, or share personal data.
+The app does not create user profiles, track listening behavior, or distribute data to third parties. Any preferences you set — such as timers, modes, or notification settings — are stored locally on your device.
+Access to Apple Music is handled entirely through Apple’s official frameworks, following Apple’s privacy standards.</p>
+</div>
+
+        <div class="faq-item">
+          <h4>Does TuneUp! work offline?</h4>
+          <p>Yes — as long as the music is available in your Apple Music library.
+TuneUp! does not stream content on its own. It only accesses the music already present in your Apple Music library, including songs, albums, and playlists you’ve added or downloaded for offline use. If that content is available offline, TuneUp! will work without an internet connection.
+Availability depends on how your Apple Music library is set up and whether the content has been downloaded to your device.</p>
+        </div>
+
+ <div class="faq-item">
+          <h4>Can I use my own playlists with TuneUp?</h4>
+          <p>Yes. TuneUp! is designed to work with your own Apple Music library.
+If you have an active Apple Music subscription, you can use your personal playlists, albums, and saved tracks for alarms, sleep timers, focus sessions, and relaxation modes. TuneUp! simply lets you reuse the music you already love, in a more intentional way.</p>
+ </div>
+
+         <div class="faq-item">
+          <h4>Does TuneUp support multiple languages?</h4>
+          <p>Yes. TuneUp! supports multiple languages, including:
+English, French, Italian, German, Spanish, Portuguese, Simplified Chinese, Japanese, Indonesian, and Korean.
+More languages will be added over time.</p>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="budgeAppleBottom">
+  <a href="https://apps.apple.com/app/6756532053">
+    <img src="assets/img/appStore_badge.png" alt="Download on the App Store">
+  </a>
+
+</div>
+  
+  </section>
+
+  <footer>
+    
+    <div class="legal-links">
+        <a href="legal/privacy/privacyIndex.html">Privacy Policy</a> |
+        <a href="legal/terms/termsIndex.html">Terms of Service</a> |
+        <a href="https://lf51.github.io/portfolio/">Developer</a> |
+        <a href="legal/contact/contactForm.html">Contacts</a>
+      </div>
+
+     <p>© Unison – All rights reserved</p>
+  </footer>
+
+</body>
+</html>
