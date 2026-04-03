@@ -20,368 +20,823 @@
   <meta name="twitter:title" content="Calogero Friscia | iOS Developer" />
   <meta name="twitter:description" content="iOS developer portfolio. Swift, SwiftUI, and mobile product development." />
 
-</head>
-
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    /* ─── RESET & VARIABLES ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --text: #1c1c1e;
-      --muted: #6e6e73;
-      --accent: #007aff;
-      --bg: #ffffff;
-      --section-gap: 4rem;
-      --max-width: 820px;
+      --bg:        #080810;
+      --surface:   rgba(255, 255, 255, 0.04);
+      --surface-2: rgba(255, 255, 255, 0.07);
+      --border:    rgba(255, 255, 255, 0.08);
+      --border-2:  rgba(255, 255, 255, 0.14);
+      --text:      #f0f0f8;
+      --muted:     rgba(240, 240, 248, 0.45);
+      --accent:    #0a84ff;
+      --accent-2:  #7c5cff;
+      --green:     #30d158;
+      --max-width: 860px;
+      --radius:    20px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
-                   "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
       background: var(--bg);
-      line-height: 1.6;
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
-    main {
+    /* ─── AMBIENT BACKGROUND ────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 40%, rgba(10, 132, 255, 0.13) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(124, 92, 255, 0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 90%, rgba(48, 209, 88, 0.06) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── LAYOUT ────────────────────────────────────────────────────── */
+    .container {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 3rem 1.5rem 5rem;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
     }
 
-    h1, h2, h3 {
-      line-height: 1.25;
-      margin-top: 0;
+    /* ─── NAV ───────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0.9rem 1.5rem;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(8, 8, 16, 0.75);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
     }
 
-    h1 {
-      font-size: 2.6rem;
-      margin-bottom: 0.5rem;
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    h2 {
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
     }
 
-    h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.3rem;
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
     }
 
-    p {
-      margin: 0.4rem 0 1rem;
-    }
-
-    .muted {
+    .nav-links a {
       color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
     }
 
-    section {
-      margin-bottom: var(--section-gap);
-    }
+    .nav-links a:hover { color: var(--text); }
 
+    /* ─── HERO ──────────────────────────────────────────────────────── */
     .hero {
-      margin-bottom: 5rem;
+      padding: 10rem 0 5rem;
     }
 
-    .role {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(48, 209, 88, 0.1);
+      border: 1px solid rgba(48, 209, 88, 0.25);
+      border-radius: 100px;
+      color: var(--green);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 2rem;
     }
 
-    .stack {
+    .hero-label::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--green);
+      animation: blink 2.5s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--green); }
+      50%       { opacity: 0.35; box-shadow: 0 0 2px var(--green); }
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 8.5vw, 5.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.72) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-role {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.8rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-bio {
+      max-width: 540px;
       color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .project {
+      font-size: 1.05rem;
+      line-height: 1.75;
       margin-bottom: 2.5rem;
     }
 
-    .project ul {
-      padding-left: 1.2rem;
-      margin: 0.5rem 0 0;
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
-    .project li {
-      margin-bottom: 0.3rem;
-    }
-
-    a {
-      color: var(--accent);
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 11px 24px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
       text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: none;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(10, 132, 255, 0.35);
     }
 
+    .btn-primary:hover {
+      background: #2196ff;
+      box-shadow: 0 6px 30px rgba(10, 132, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border-2);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ─── SECTION HEADERS ───────────────────────────────────────────── */
+    .section-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 4vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ─── SECTION WRAPPERS ──────────────────────────────────────────── */
+    .section {
+      padding: 4.5rem 0;
+    }
+
+    .section + .section {
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── PROJECT CARDS ─────────────────────────────────────────────── */
+    .project-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .project-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(10,132,255,0.35), rgba(124,92,255,0.2), transparent 70%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(10, 132, 255, 0.1);
+      border-color: var(--border-2);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    /* Subtle shimmer effect on card top edge */
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(10,132,255,0.5), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover::after { opacity: 1; }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .project-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      object-fit: cover;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .project-meta { flex: 1; min-width: 0; }
+
+    .project-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.2rem;
+      color: var(--text);
+    }
+
+    .project-subtitle {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .project-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      flex-shrink: 0;
+    }
+
+    .status-live {
+      background: rgba(48, 209, 88, 0.1);
+      border: 1px solid rgba(48, 209, 88, 0.25);
+      color: var(--green);
+    }
+
+    .status-live::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    .status-archived {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--muted);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 1.2rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.76rem;
+      font-weight: 500;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(240,240,248,0.6);
+      transition: all 0.2s ease;
+    }
+
+    .project-card:hover .tag {
+      background: rgba(10,132,255,0.08);
+      border-color: rgba(10,132,255,0.2);
+      color: rgba(10,132,255,0.85);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--accent);
+      font-size: 0.87rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: gap 0.2s ease, opacity 0.2s ease;
+    }
+
+    .project-link:hover {
+      gap: 8px;
+      opacity: 0.8;
+    }
+
+    .project-link svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .project-link:hover svg { transform: translateX(2px); }
+
+    /* ─── SKILLS ────────────────────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.6rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .skill-group:hover { border-color: var(--border-2); }
+
+    .skill-group-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .skill-pill {
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: rgba(240,240,248,0.72);
+      transition: all 0.2s ease;
+    }
+
+    .skill-pill:hover {
+      background: rgba(10,132,255,0.1);
+      border-color: rgba(10,132,255,0.25);
+      color: var(--text);
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────────────── */
     footer {
-      margin-top: 5rem;
-      font-size: 0.9rem;
+      padding: 3rem 0 2.5rem;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
       color: var(--muted);
     }
 
-    footer a {
-      color: var(--muted);
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
     }
 
-    .brand {
-  display: flex;
-  align-items: center;
-  font-size: clamp(2.6rem, 6vw, 5.2rem); /* 👈 SCALA TUTTO */
-  gap: 7px;
-}
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
 
-.brand img {
-  height: 0.8em;
-  width: auto;
-  object-fit: contain;
-  border-radius: 5px;
-  transform: translateY(2px);
-}
+    .footer-links a:hover { color: var(--text); }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2.1rem;
-      }
+    .footer-links svg {
+      width: 16px;
+      height: 16px;
+      opacity: 0.7;
+    }
+
+    /* ─── SCROLL ANIMATIONS ─────────────────────────────────────────── */
+    .animate-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .animate-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .animate-in:nth-child(2) { transition-delay: 0.08s; }
+    .animate-in:nth-child(3) { transition-delay: 0.16s; }
+    .animate-in:nth-child(4) { transition-delay: 0.24s; }
+    .animate-in:nth-child(5) { transition-delay: 0.32s; }
+    .animate-in:nth-child(6) { transition-delay: 0.40s; }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .hero { padding: 8rem 0 5rem; }
+      .hero-name { font-size: 2.8rem; }
+      .nav-links { display: none; }
+      .project-card { padding: 1.4rem 1.2rem; }
+      .project-icon { width: 44px; height: 44px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 380px) {
+      .hero-name { font-size: 2.3rem; }
     }
   </style>
 </head>
 
 <body>
-  <main>
 
-    <!-- HERO -->
+  <!-- ─── NAV ──────────────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">CF<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="mailto:lillofreedeveloper@gmail.com">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────── -->
+  <div class="container">
     <section class="hero">
-      <h1>Calogero Friscia</h1>
-      <p class="role">iOS Developer</p>
-      <p class="stack">
-        Swift · SwiftUI · iOS Frameworks
+      <div class="hero-label">Open to opportunities</div>
+      <h1 class="hero-name">Calogero<br>Friscia</h1>
+      <p class="hero-role">iOS Developer</p>
+      <p class="hero-bio">
+        I turn ideas into polished iOS apps — solo, end-to-end, shipped.
+        Strong on architecture, obsessive about UX.
       </p>
-
-       <p>
-        iOS developer focused on building clean, reliable apps with strong attention to UX
-        and long-term maintainability.
-      </p>
-      <p>
-        The projects presented here were developed end-to-end by me — from concept
-        and design to implementation, testing, and release.
-      </p>
-       <p>
-        I’m equally comfortable working independently or contributing as part of a team,
-        and I look forward to collaborating on shared projects in the future.
-      </p>
-
-    </section>
-
-    <!-- PROJECTS -->
-    <section>
-      <h2>Selected Projects</h2>
-
-      <!-- Unison -->
-      <div class="project">
-        <div class="brand">
-        <img src="assets/img/unisonLogo.png" alt="TuneUp! logo" />
-        <h3>Unison - Multi Device Video</h3>
-      </div>
-        <p class="muted">
-          Sync video recording across multiple devices · Available on Mac and App Store
-        </p>
-        <ul>
-          <li>Developed for iOS and Mac Catalyst</li>
-          <li>Integrated Multipeer Connectivity</li>
-          <li>Integrated PhotoKit</li>
-          <li>AVFoundation</li>
-          <li>Multilingual localization</li>
-        </ul>
-        <p>
-          <a href="https://apps.apple.com/app/6756532053" target="_blank">
-            App Store | 
-          </a>
-          <a href="projects/unison/unisonIndex.html" target="_blank">
-            More
-          </a>
-        </p>
-        
-      </div>
-
-       <!-- TuneUp -->
-      <div class="project">
-        <div class="brand">
-        <img src="assets/img/tuneLogo.png" alt="TuneUp! logo" />
-        <h3>TuneUp! Music Alarm</h3>
-      </div>
-        <p class="muted">
-          Music-based alarm and focus app · Available on the App Store
-        </p>
-        <ul>
-          <li>Integrated MusicKit</li>
-          <li>Integrated AlarmKit</li>
-          <li>NotificationCenter</li>
-          <li>In-app purchases with StoreKit</li>
-          <li>Multilingual localization</li>
-        </ul>
-        <p>
-          <a href="https://apps.apple.com/app/apple-store/id6754902021?pt=123477141&ct=website&mt=8" target="_blank">
-            App Store |
-          </a>
-           <a href="https://tuneupalarm.app" target="_blank">
-            Website
-          </a>
-        </p>
-        
-      </div>
-
-      <!-- Flip Flop Poker -->
-      <div class="project">
-         <div class="brand">
-        <img src="assets/img/pokerLogo.png" alt="TuneUp! logo" />
-        <h3>Flip Flop Poker</h3>
-         </div>
-        <p class="muted">
-          Single-player iOS game inspired by Texas Hold’em · Available on the App Store
-        </p>
-        <ul>
-          <li>Custom poker hand evaluation algorithm</li>
-          <li>Game Center integration</li>
-          <li>AdMob monetization</li>
-          <li>Multilingual localization</li>
-        </ul>
-        <p>
-          <a href="https://apps.apple.com/it/app/get-the-nut-in-60/id1593070140?l=en-GB" target="_blank">
-            App Store →
-          </a>
-          
-        </p>
-      </div>
-
-      <!-- HosterFlow -->
-      <div class="project">
-         <div class="brand">
-        <img src="assets/img/hosterLogo.png" alt="TuneUp! logo" />
-        <h3>HosterFlow!</h3>
-         </div>
-        <p class="muted">
-          Management app for B&B and short-term rental hosts · No longer available on the App Store
-        </p>
-        <ul>
-          <li>Firebase authentication and real-time database</li>
-          <li>In-app purchases with StoreKit</li>
-          <li>Modular architecture with reusable components</li>
-        </ul>
-      </div>
-
-      <!-- Fantabid -->
-      <div class="project">
-         <div class="brand">
-        <img src="assets/img/fantabidLogo.png" alt="TuneUp! logo" />
-        <h3>Fantabid</h3>
-         </div>
-        <p class="muted">
-          First full-stack iOS app · Learning project · No longer available on the App Store
-        </p>
-        <ul>
-          <li>Local data persistence</li>
-          <li>Remote JSON data handling</li>
-        </ul>
-      </div>
-
-    </section>
-
-     <!-- Public Frameworks -->
-    <!--
-    <section>
-
-      <h2>Selected Frameworks</h2>
-
-      // frameWork list
-      <div class="project">
-        <div class="brand">
-        <img src="assets/img/unisonLogo.png" alt="TuneUp! logo" />
-        <h3>Unison - Multi Device Video</h3>
-      </div>
-        <p class="muted">
-          Sync video recording across multiple devices · Available on Mac and App Store
-        </p>
-        <ul>
-          <li>Developed for iOS and Mac Catalyst</li>
-          <li>Integrated Multipeer Connectivity</li>
-          <li>Integrated PhotoKit</li>
-          <li>AVFoundation</li>
-          <li>Multilingual localization</li>
-        </ul>
-        <p>
-          <a href="https://apps.apple.com/app/apple-store/id6754902021?pt=123477141&ct=website&mt=8" target="_blank">
-            App Store →
-          </a>
-        </p>
-        
+      <div class="hero-cta">
+        <a href="mailto:lillofreedeveloper@gmail.com" class="btn btn-primary">
+          Get in touch
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#projects" class="btn btn-ghost">
+          See my work
+        </a>
       </div>
     </section>
- 
-  -->
- <section>
-  <h2>Skills</h2>
+  </div>
 
-  <h3>Language:</h3>
-  <ul>
-    <li>Swift</li>
-  </ul>
+  <!-- ─── PROJECTS ─────────────────────────────────────────────────── -->
+  <div class="container">
+    <section class="section" id="projects">
+      <span class="section-label">Work</span>
+      <h2 class="section-title">Selected Projects</h2>
 
-  <h3>Frameworks:</h3>
-  <ul>
-     <li>SwiftUI</li>
-    <li>UIKit</li>
-    <li>Local Data Persistence (SwiftData, UserDefaults, Keychain)</li>
-     <li>AVFoundation</li>
-     <li>Multipeer Connectivity</li>
-  </ul>
+      <div class="project-grid">
 
-  <h3>Architecture & Patterns:</h3>
-  <ul>
-    <li>MVVM</li>
-     <li>Combine</li>
-    <li>Dependency Injection</li>
-  </ul>
+        <!-- Unison -->
+        <div class="project-card animate-in">
+          <div class="project-header">
+            <img class="project-icon" src="assets/img/unisonLogo.png" alt="Unison logo" />
+            <div class="project-meta">
+              <div class="project-name">Unison — Multi Device Video</div>
+              <div class="project-subtitle">Record in sync across iPhone, iPad and Mac</div>
+            </div>
+            <span class="project-status status-live">Live</span>
+          </div>
+          <div class="project-tags">
+            <span class="tag">iOS</span>
+            <span class="tag">Mac Catalyst</span>
+            <span class="tag">Multipeer Connectivity</span>
+            <span class="tag">AVFoundation</span>
+            <span class="tag">PhotoKit</span>
+            <span class="tag">Localization</span>
+          </div>
+          <div class="project-links">
+            <a href="https://apps.apple.com/app/6756532053" target="_blank" class="project-link">
+              App Store
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="projects/unison/unisonIndex.html" target="_blank" class="project-link">
+              Case Study
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
 
-  <h3>Networking & APIs:</h3>
-  <ul>
-    <li>JSON parsing</li>
-    <li>URLSession</li>
-    <li>Firebase</li>
-  </ul>
+        <!-- TuneUp -->
+        <div class="project-card animate-in">
+          <div class="project-header">
+            <img class="project-icon" src="assets/img/tuneLogo.png" alt="TuneUp! logo" />
+            <div class="project-meta">
+              <div class="project-name">TuneUp! Music Alarm Clock</div>
+              <div class="project-subtitle">Wake up to your own music — thanks Apple Music integration</div>
+            </div>
+            <span class="project-status status-live">Live</span>
+          </div>
+          <div class="project-tags">
+            <span class="tag">MusicKit</span>
+            <span class="tag">AlarmKit</span>
+            <span class="tag">StoreKit</span>
+            <span class="tag">NotificationCenter</span>
+            <span class="tag">Localization</span>
+          </div>
+          <div class="project-links">
+            <a href="https://apps.apple.com/app/apple-store/id6754902021?pt=123477141&ct=website&mt=8" target="_blank" class="project-link">
+              App Store
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://tuneupalarm.app" target="_blank" class="project-link">
+              Website
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
 
-  <h3>Tooling & DevOps:</h3>
-  <ul>
-    <li>Xcode</li>
-    <li>Git / GitHub</li>
-    <li>TestFlight</li>
-  </ul>
+        <!-- Flip Flop Poker -->
+        <div class="project-card animate-in">
+          <div class="project-header">
+            <img class="project-icon" src="assets/img/pokerLogo.png" alt="Flip Flop Poker logo" />
+            <div class="project-meta">
+              <div class="project-name">Flip Flop Poker</div>
+              <div class="project-subtitle">Single-player iOS game inspired by Texas Hold'em</div>
+            </div>
+            <span class="project-status status-live">Live</span>
+          </div>
+          <div class="project-tags">
+            <span class="tag">Game Center</span>
+            <span class="tag">Custom Algorithm</span>
+            <span class="tag">AdMob</span>
+            <span class="tag">Localization</span>
+          </div>
+          <div class="project-links">
+            <a href="https://apps.apple.com/it/app/get-the-nut-in-60/id1593070140?l=en-GB" target="_blank" class="project-link">
+              App Store
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
 
-  <h3>Design & UX</h3>
-   <ul>
-    <li>Auto Layout</li>
-     <li>Animations</li>
-  </ul>
- 
-</section>
+        <!-- HosterFlow -->
+        <div class="project-card animate-in">
+          <div class="project-header">
+            <img class="project-icon" src="assets/img/hosterLogo.png" alt="HosterFlow logo" />
+            <div class="project-meta">
+              <div class="project-name">HosterFlow!</div>
+              <div class="project-subtitle">Bookings, guests, and revenue — all in one app for short-term rental hosts</div>
+            </div>
+            <span class="project-status status-archived">Archived</span>
+          </div>
+          <div class="project-tags">
+            <span class="tag">Firebase</span>
+            <span class="tag">Real-time DB</span>
+            <span class="tag">StoreKit</span>
+            <span class="tag">Modular Architecture</span>
+          </div>
+        </div>
 
-    <!-- FOOTER -->
-    <footer>
-      <p>
-       <!-- <a href="https://github.com/lf51" target="_blank">GitHub</a> · -->
-        <a href="https://linkedin.com/in/lillofree" target="_blank">LinkedIn</a> |
-        <a href="mailto:lillofreedeveloper@gmail.com">Email</a>
-      </p>
-    </footer>
+        <!-- Fantabid -->
+        <div class="project-card animate-in">
+          <div class="project-header">
+            <img class="project-icon" src="assets/img/fantabidLogo.png" alt="Fantabid logo" />
+            <div class="project-meta">
+              <div class="project-name">Fantabid</div>
+              <div class="project-subtitle">My first full-stack iOS app — where everything started</div>
+            </div>
+            <span class="project-status status-archived">Archived</span>
+          </div>
+          <div class="project-tags">
+            <span class="tag">Local Persistence</span>
+            <span class="tag">Remote JSON</span>
+          </div>
+        </div>
 
-  </main>
+      </div>
+    </section>
+  </div>
+
+  <!-- ─── SKILLS ────────────────────────────────────────────────────── -->
+  <div class="container">
+    <section class="section" id="skills">
+      <span class="section-label">Expertise</span>
+      <h2 class="section-title">Skills</h2>
+
+      <div class="skills-grid">
+
+        <div class="skill-group animate-in">
+          <div class="skill-group-title">Language</div>
+          <div class="skill-list">
+            <span class="skill-pill">Swift</span>
+          </div>
+        </div>
+
+        <div class="skill-group animate-in">
+          <div class="skill-group-title">Frameworks</div>
+          <div class="skill-list">
+            <span class="skill-pill">SwiftUI</span>
+            <span class="skill-pill">UIKit</span>
+            <span class="skill-pill">AVFoundation</span>
+            <span class="skill-pill">Multipeer Connectivity</span>
+          </div>
+        </div>
+
+        <div class="skill-group animate-in">
+          <div class="skill-group-title">Data &amp; Storage</div>
+          <div class="skill-list">
+            <span class="skill-pill">SwiftData</span>
+            <span class="skill-pill">UserDefaults</span>
+            <span class="skill-pill">Keychain</span>
+          </div>
+        </div>
+
+        <div class="skill-group animate-in">
+          <div class="skill-group-title">Architecture</div>
+          <div class="skill-list">
+            <span class="skill-pill">MVVM</span>
+            <span class="skill-pill">Combine</span>
+            <span class="skill-pill">Dependency Injection</span>
+          </div>
+        </div>
+
+        <div class="skill-group animate-in">
+          <div class="skill-group-title">Networking &amp; APIs</div>
+          <div class="skill-list">
+            <span class="skill-pill">URLSession</span>
+            <span class="skill-pill">JSON Parsing</span>
+            <span class="skill-pill">Firebase</span>
+          </div>
+        </div>
+
+        <div class="skill-group animate-in">
+          <div class="skill-group-title">Tooling &amp; DevOps</div>
+          <div class="skill-list">
+            <span class="skill-pill">Xcode</span>
+            <span class="skill-pill">Git / GitHub</span>
+            <span class="skill-pill">TestFlight</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© 2025 Calogero Friscia</span>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/lillofree" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2V9zm2-6a2 2 0 100 4 2 2 0 000-4z"/></svg>
+          LinkedIn
+        </a>
+        <a href="mailto:lillofreedeveloper@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll-triggered animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+    // Nav opacity on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 20
+        ? 'rgba(8, 8, 16, 0.9)'
+        : 'rgba(8, 8, 16, 0.75)';
+    }, { passive: true });
+  </script>
+
 </body>
 </html>
-
-
