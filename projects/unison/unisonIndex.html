@@ -1,452 +1,567 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Unison – Multi Device Video</title>
- <meta name="description" content="Turn multiple Apple devices into a synchronized multi-angle camera setup, controlled from one place.">
+  <title>Unison – Multi Device Video</title>
+  <meta name="description" content="Turn multiple Apple devices into a synchronized multi-angle camera setup, controlled from one place." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    /* ─── RESET & VARIABLES ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --secondary: #666666;
-      --border: #eaeaea;
-      --accent: #007aff;
+      --bg:        #080810;
+      --surface:   rgba(255, 255, 255, 0.04);
+      --surface-2: rgba(255, 255, 255, 0.07);
+      --border:    rgba(255, 255, 255, 0.08);
+      --border-2:  rgba(255, 255, 255, 0.14);
+      --text:      #f0f0f8;
+      --muted:     rgba(240, 240, 248, 0.45);
+      --accent:    #0a84ff;
+      --accent-2:  #7c5cff;
+      --max-width: 960px;
+      --radius:    20px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
-    header {
-      padding: 80px 24px 60px;
-      text-align: center;
-      max-width: 960px;
+    /* ─── AMBIENT BACKGROUND ────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(10, 132, 255, 0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 70%, rgba(124, 92, 255, 0.09) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ───────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0.9rem 1.5rem;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(8, 8, 16, 0.8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
       margin: 0 auto;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-
-    header p {
-      font-size: 1.5rem;
-      color: var(--secondary);
-      max-width: 720px;
-      margin: 0 auto 32px;
-      font-style: italic;
-    }
-
-    .cta {
       display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .cta a {
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       text-decoration: none;
-      padding: 12px 22px;
-      border-radius: 999px;
+    }
+
+    .nav-brand img {
+      height: 28px;
+      width: 28px;
+      border-radius: 7px;
+      object-fit: cover;
+    }
+
+    .nav-brand span {
       font-size: 1rem;
-      font-weight: 500;
-      border: 1px solid var(--border);
+      font-weight: 700;
       color: var(--text);
-      transition: all 0.2s ease;
+      letter-spacing: -0.01em;
     }
 
-    .cta a.primary {
-      background-color: var(--accent);
-      color: white;
-      border-color: var(--accent);
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
     }
 
-    .cta a:hover {
-      transform: translateY(-1px);
+    .nav-back:hover { color: var(--text); }
+
+    .nav-back svg { width: 14px; height: 14px; }
+
+    /* ─── LAYOUT ────────────────────────────────────────────────────── */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
     }
 
-    section {
-      padding: 80px 24px;
+    /* ─── HERO ──────────────────────────────────────────────────────── */
+    .hero {
+      padding: 9rem 1.5rem 6rem;
+      text-align: center;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-brand img {
+      height: 72px;
+      width: 72px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .hero-brand h1 {
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 2.2rem;
+      line-height: 1.7;
+    }
+
+    .appstore-badge {
+      display: inline-block;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .appstore-badge:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .appstore-badge img {
+      height: 52px;
+      width: auto;
+    }
+
+    /* ─── SECTION HEADERS ───────────────────────────────────────────── */
+    .section-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      text-align: center;
+      margin-bottom: 0.7rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+    }
+
+    /* ─── SECTION WRAPPER ───────────────────────────────────────────── */
+    .section {
+      padding: 5rem 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section + .section {
       border-top: 1px solid var(--border);
     }
 
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    h2 {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 24px;
-      text-align: center;
-    }
-
-    .features {
+    /* ─── FEATURES ──────────────────────────────────────────────────── */
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 32px;
-      margin-top: 48px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
     }
 
-    .feature {
-      text-align: center;
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-.feature .placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-
-  width: 100%;
-  height: 320px;
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  border-radius: 16px;
-  padding: 16px;
-  overflow: hidden;
-}
-
-.placeholder.bg-snooze {
-  background-image: url("assets/img/sfondoPlaceholder.jpeg");
-}
-
-.placeholder.bg-sleep {
-  background-image: url("assets/img/sfondoPlaceholderDark.jpeg");
-}
-
-.placeholder.bg-focus {
-  background-image: url("assets/img/sfondoPlaceholder2.jpeg");
-}
-
-
-
-    /* custom style*/
- .feature .placeholder img {
-  max-height: 100%;
-  max-width: 95%;
-  object-fit: contain;
-  flex-shrink: 1;
-  z-index: 1;
-}
-
-
-
-    .feature h3 {
-      margin-bottom: 8px;
-      font-size: 1.1rem;
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-2);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
     }
 
-    .feature p {
-      color: var(--secondary);
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.35rem;
+    }
+
+    .feature-card > p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      line-height: 1.55;
+    }
+
+    .feature-screenshot {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 260px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .feature-screenshot img {
+      max-width: 90%;
+      max-height: 280px;
+      object-fit: contain;
+    }
+
+    .bg-focus { background-image: url("assets/img/sfondoPlaceholder2.jpeg"); }
+
+    /* ─── VIDEO SECTION ─────────────────────────────────────────────── */
+    .video-layout {
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
+    }
+
+    .video-text { flex: 1; }
+
+    .video-text h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.3;
+      margin-bottom: 0.8rem;
+    }
+
+    .video-text p {
+      color: var(--muted);
       font-size: 0.95rem;
+      line-height: 1.7;
     }
 
-    .faq {
-      max-width: 720px;
+    .video-wrapper {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      display: block;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    /* ─── FAQ ───────────────────────────────────────────────────────── */
+    .faq-list {
+      max-width: 700px;
       margin: 0 auto;
     }
 
     .faq-item {
       border-bottom: 1px solid var(--border);
-      padding: 20px 0;
+      padding: 1.3rem 0;
     }
 
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+
     .faq-item h4 {
-      margin: 0 0 8px;
-      font-size: 1rem;
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .faq-item p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── APP STORE CTA ─────────────────────────────────────────────── */
+    .appstore-cta {
+      text-align: center;
+      padding-top: 3rem;
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .legal-links {
-      text-align: center;
-      margin-top: 0px;
-      margin-bottom: 10px;
-      font-size: 0.9rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.2rem;
+      margin-bottom: 1rem;
     }
 
     .legal-links a {
-      color: #007AFF;          /* Apple system blue */
-       font-size: 0.9rem;
+      color: var(--muted);
       text-decoration: none;
-      margin: 0 8px;
-    }
-
-.legal-links a:hover {
-  text-decoration: underline;
-}
-
-    footer {
-      padding: 40px 24px;
-      text-align: center;
-      color: var(--secondary);
       font-size: 0.85rem;
-      border-top: 1px solid var(--border);
+      font-weight: 500;
+      transition: color 0.2s ease;
     }
-    /* Modifiche di stile lf51 */
-.brand {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  font-size: clamp(2.6rem, 6vw, 5.2rem); /* 👈 SCALA TUTTO */
-  gap: 7px;
-}
 
-.brand img {
-  height: 1em;
-  width: auto;
-  object-fit: contain;
-  transform: translateY(2px);
-}
+    .legal-links a:hover { color: var(--text); }
 
-.brand h1 {
-  font-size: 1em;
-  font-weight: 600;
-  line-height: 1;
-}
+    .footer-copy {
+      font-size: 0.82rem;
+      color: rgba(240,240,248,0.28);
+    }
 
-.budgeApple img {
- height: clamp(3.0rem, 6vw, 5.2rem);
-  width: auto;
-  object-fit: contain;
-  transform: translateY(2px);
-  
-}
+    /* ─── ANIMATE IN ────────────────────────────────────────────────── */
+    .animate-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
 
-.budgeAppleBottom {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  
-}
+    .animate-in.visible { opacity: 1; transform: translateY(0); }
+    .animate-in:nth-child(2) { transition-delay: 0.08s; }
+    .animate-in:nth-child(3) { transition-delay: 0.16s; }
 
-.budgeAppleBottom img {
-  height: clamp(3.0rem, 6vw, 5.2rem);
-  width: auto;
-  object-fit: contain;
-  transform: translateY(2px);
-  margin-top: 50px;
-}
-    
-.music-embed {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 48px;
-
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-.music-text {
-  max-width: 520px;
-  text-align: center;
-}
-.video-wrapper {
-  width: 100%;
-  max-width: 460px;
-}
-
-
-.video-wrapper video {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  display: block;
-}
-
-
-@media (max-width: 768px) {
-  .music-embed {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-}
-    
+    /* ─── RESPONSIVE ────────────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      .video-layout { flex-direction: column; }
+      .hero { padding: 8rem 1.5rem 4rem; }
+      .hero-brand img { height: 56px; width: 56px; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- HERO / PRODUCT HEADER -->
-  <header>
-    <!-- <h1>TuneUp!</h1> -->
-  <div class="brand">
-    <img src="assets/img/logoTrasparente.png" alt="Unison logo" />
-    <h1>Unison</h1>
+  <!-- ─── NAV ──────────────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="#">
+        <img src="assets/img/logoTrasparente.png" alt="Unison" />
+        <span>Unison</span>
+      </a>
+      <a class="nav-back" href="../../index.html">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to portfolio
+      </a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="hero-brand">
+      <img src="assets/img/logoTrasparente.png" alt="Unison logo" />
+      <h1>Unison</h1>
+    </div>
+    <p class="hero-tagline">
+      Turn multiple Apple devices into a synchronized multi-angle camera setup,
+      controlled from one place.
+    </p>
+    <a class="appstore-badge" href="https://apps.apple.com/app/6756532053" target="_blank">
+      <img src="assets/img/appStore_badge.png" alt="Download on the App Store" />
+    </a>
   </div>
-    <p>Turn multiple Apple devices into a synchronized multi-angle camera setup, controlled from one place.</p>
 
-    <!-- Modifiche lf51 -->
-<div class="budgeApple">
-  <a href="https://apps.apple.com/app/6756532053">
-    <img src="assets/img/appStore_badge.png" alt="Download on the App Store">
-  </a>
-
-</div>
- <!-- Chiusa Modifiche lf51 -->
-    
-  </header>
-
-
-  <!-- PRODUCT OVERVIEW -->
-  <section>
-    <div class="container">
-      <h2>One scene. Multiple Apple devices. One recording.</h2>
-      <p style="text-align:center; color: var(--secondary); max-width:720px; margin:0 auto;">
+  <!-- ─── FEATURES ─────────────────────────────────────────────────── -->
+  <div class="container">
+    <section class="section">
+      <span class="section-label">How it works</span>
+      <h2 class="section-title">One scene. Multiple Apple devices. One recording.</h2>
+      <p class="section-subtitle">
         Capture the same moment from different angles, while controlling everything from a single device.
       </p>
 
-      <div class="features">
-        <div class="feature">
+      <div class="features-grid">
+        <div class="feature-card animate-in">
           <h3>The control center</h3>
           <p>Use one device to manage the entire recording session.</p>
-          <div class="placeholder bg-focus">
-             <img src="assets/img/mac_screen.png" alt="Unison on Mac" />
-      
+          <div class="feature-screenshot bg-focus">
+            <img src="assets/img/mac_screen.png" alt="Unison on Mac" />
           </div>
-          <!--<h3>Snooze with Music</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
         </div>
-        <div class="feature">
+        <div class="feature-card animate-in">
           <h3>A new angle</h3>
           <p>Each device records independently, adding another point of view.</p>
-          <div class="placeholder bg-focus">
+          <div class="feature-screenshot bg-focus">
             <img src="assets/img/iphone_screen.png" alt="Unison on iPhone" />
-    
-
           </div>
-          <!--<h3>Fall asleep with Music</h3>
-          <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>-->
         </div>
-        <div class="feature">
+        <div class="feature-card animate-in">
           <h3>Working together</h3>
           <p>All your Apple devices capture the same moment, in sync.</p>
-          <div class="placeholder bg-focus">  
+          <div class="feature-screenshot bg-focus">
             <img src="assets/img/CatPad_screen.png" alt="Unison on iPad" />
           </div>
-          
-          <!--<h3>Stay Focus or Relax </h3>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation.</p>-->
         </div>
-       
       </div>
-    </div>
-  </section>
-
-<!-- Video last Update-->
-
-<section>
-  <div class="music-embed">
-    <div class="music-text">
-      <h2>Discover the latest version of Unison</h2>
-    </div>
-
-    <div class="video-wrapper">
-      <video
-        controls
-        preload="metadata"
-        poster="assets/video/tuneup-poster.jpg"
-      >
-        <source src="assets/video/appLastUpdate.MP4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
+    </section>
   </div>
-</section>
 
+  <!-- ─── VIDEO ────────────────────────────────────────────────────── -->
+  <div class="container">
+    <section class="section">
+      <div class="video-layout">
+        <div class="video-text">
+          <span class="section-label" style="text-align:left;">Latest update</span>
+          <h2>Discover the latest version of Unison</h2>
+          <p>See what's new — watch the latest update video to explore the newest features and improvements.</p>
+        </div>
+        <div class="video-wrapper">
+          <video controls preload="metadata" poster="assets/video/tuneup-poster.jpg">
+            <source src="assets/video/appLastUpdate.MP4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </section>
+  </div>
 
-  <!-- FAQ -->
-  <section>
-    <div class="container">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq">
+  <!-- ─── FAQ ──────────────────────────────────────────────────────── -->
+  <div class="container">
+    <section class="section">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+
+      <div class="faq-list">
         <div class="faq-item">
           <h4>What does Unison do?</h4>
           <p>Unison lets you record video from multiple Apple devices at the same time, while controlling the recording from one device.</p>
         </div>
         <div class="faq-item">
           <h4>Which devices are supported?</h4>
-          <p>Unison works with Apple devices running iOS, iPadOS, or macOS.
-Any supported device can join a session and record video.</p>
+          <p>Unison works with Apple devices running iOS, iPadOS, or macOS. Any supported device can join a session and record video.</p>
         </div>
         <div class="faq-item">
-          <h4>Do I need internet connection?</h4>
-          <p>No internet connection is required.
-Devices connect locally using nearby network and peer-to-peer connectivity.</p>
+          <h4>Do I need an internet connection?</h4>
+          <p>No internet connection is required. Devices connect locally using nearby network and peer-to-peer connectivity.</p>
         </div>
-<div class="faq-item">
+        <div class="faq-item">
           <h4>Can any device control the recording?</h4>
           <p>Yes. During a session, one device is set as the controller (Master) and sends commands to the others.</p>
-</div>
-
+        </div>
         <div class="faq-item">
           <h4>What happens when I stop recording?</h4>
           <p>When the session ends, the recorded videos are transferred to the controlling device and saved locally (unless a connection is interrupted).</p>
         </div>
-
- <div class="faq-item">
+        <div class="faq-item">
           <h4>Where are the videos saved?</h4>
-          <p>On the controlling device.
-On macOS, they are saved locally so you can access them directly from your files. On iPhone and iPad in the library.</p>
- </div>
-
-         <div class="faq-item">
+          <p>On the controlling device. On macOS, they are saved locally so you can access them directly from your files. On iPhone and iPad, in the photo library.</p>
+        </div>
+        <div class="faq-item">
           <h4>Can I use devices with different camera qualities?</h4>
-          <p>Yes.
-Each device records using its own camera, so results may differ in resolution and exposure.</p>
+          <p>Yes. Each device records using its own camera, so results may differ in resolution and exposure.</p>
         </div>
-
-           <div class="faq-item">
+        <div class="faq-item">
           <h4>How many devices can I connect?</h4>
-          <p>Unison is designed for small multi-device setups.
-Performance depends on device models and network conditions.</p>
+          <p>Unison is designed for small multi-device setups. Performance depends on device models and network conditions.</p>
         </div>
-
-           <div class="faq-item">
+        <div class="faq-item">
           <h4>Is Unison free?</h4>
-          <p>Yes. No Ads. No Subscription.</p>
+          <p>Yes. No ads. No subscription.</p>
         </div>
-        
       </div>
-    </div>
 
-    <div class="budgeAppleBottom">
-  <a href="https://apps.apple.com/app/6756532053">
-    <img src="assets/img/appStore_badge.png" alt="Download on the App Store">
-  </a>
+      <div class="appstore-cta">
+        <a class="appstore-badge" href="https://apps.apple.com/app/6756532053" target="_blank">
+          <img src="assets/img/appStore_badge.png" alt="Download on the App Store" />
+        </a>
+      </div>
+    </section>
+  </div>
 
-</div>
-  
-  </section>
-
+  <!-- ─── FOOTER ────────────────────────────────────────────────────── -->
   <footer>
-    
     <div class="legal-links">
-        <a href="legal/privacy/privacyIndex.html">Privacy Policy</a> |
-        <a href="legal/terms/termsIndex.html">Terms of Service</a> |
-        <a href="https://lf51.github.io/portfolio/">Developer</a> |
-        <a href="legal/contact/contactForm.html">Contacts</a>
-      </div>
-
-     <p>© Unison – All rights reserved</p>
+      <a href="legal/privacy/privacyIndex.html">Privacy Policy</a>
+      <a href="legal/terms/termsIndex.html">Terms of Service</a>
+      <a href="https://lf51.github.io/portfolio/">Developer</a>
+      <a href="legal/contact/contactForm.html">Contact</a>
+    </div>
+    <p class="footer-copy">© Unison — All rights reserved</p>
   </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 20
+        ? 'rgba(8, 8, 16, 0.95)'
+        : 'rgba(8, 8, 16, 0.8)';
+    }, { passive: true });
+  </script>
 
 </body>
 </html>
