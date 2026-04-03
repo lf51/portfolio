@@ -1,85 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact — TuneUp!</title>
-  <meta name="description" content="Get in touch with Unison team. Questions, feedback, or support requests — we’re here to help.">
-
-
+  <title>Contact — Unison</title>
+  <meta name="description" content="Get in touch with the Unison team. Questions, feedback, or support requests — we're here to help.">
+  <link rel="stylesheet" href="../../../../style/legal-style.css">
   <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #ffffff;
-      color: #111;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 96px 24px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
+    .container { text-align: center; }
+    .email-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 0.5rem;
+      padding: 12px 24px;
+      background: rgba(10,132,255,0.1);
+      border: 1px solid rgba(10,132,255,0.25);
+      border-radius: 12px;
+      color: #0a84ff;
+      font-size: 1rem;
       font-weight: 600;
-      margin-bottom: 16px;
-    }
-
-    p {
-      color: #555;
-      margin-bottom: 24px;
-    }
-
-    a {
-      color: #007aff;
       text-decoration: none;
-      font-weight: 500;
+      transition: all 0.2s ease;
     }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .email {
-      font-size: 1.1rem;
-    }
-
-    footer {
-      margin-top: 64px;
-      font-size: 0.85rem;
-      color: #888;
+    .email-link:hover {
+      background: rgba(10,132,255,0.18);
+      text-decoration: none;
+      transform: translateY(-1px);
     }
   </style>
 </head>
-
 <body>
   <main class="container">
     <h1>Contact</h1>
+    <p>Have questions, feedback, or need support with Unison?<br />We're happy to hear from you.</p>
+    <a class="email-link" href="mailto:lillofreedeveloper@gmail.com">
+      lillofreedeveloper@gmail.com
+    </a>
 
-    <p>
-      Have questions, feedback, or need support with Unison?<br />
-      We’re happy to hear from you.
-    </p>
-
-    <p class="email">
-      📧 <a href="mailto:lillofreedeveloper@gmail.com">mail to support</a>
-    </p>
-
-      <footer>
-    <p>
-    <a href="../../unisonIndex.html">Home</a> | 
-    <a href="../privacy/privacyIndex.html">Privacy Policy</a> | 
-    <a href="../terms/termsIndex.html">Terms of Service</a>
-  </p>
-  <p>© Unison — All rights reserved</p>
-  
-</footer>
-
+    <footer>
+      <p>
+        <a href="../../unisonIndex.html">Home</a> &nbsp;·&nbsp;
+        <a href="../privacy/privacyIndex.html">Privacy Policy</a> &nbsp;·&nbsp;
+        <a href="../terms/termsIndex.html">Terms of Service</a>
+      </p>
+      <p>© Unison — All rights reserved</p>
+    </footer>
   </main>
 </body>
 </html>
