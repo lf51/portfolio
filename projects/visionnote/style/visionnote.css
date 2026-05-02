@@ -537,14 +537,29 @@ nav.scrolled { border-color: var(--border-2); }
 }
 
 /* ─── SCREENSHOTS ────────────────────────────────────────────────────────── */
-.screenshots { padding: 0 0 8rem; }
+.screenshots { padding: 0 0 8rem; position: relative; }
 .screenshots .container { margin-bottom: 2.5rem; }
+
+/* Fade hint on the right edge */
+.screenshots::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 80px;
+  background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
 
 .screenshots-row {
   display: flex;
   gap: 1.5rem;
   overflow-x: auto;
-  padding: 1rem 1.5rem 2rem;
+  /* Align left edge with container content on any viewport width */
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  padding-inline-start: max(1.5rem, calc((100vw - var(--max-w)) / 2 + 1.5rem));
+  padding-inline-end: 5rem;
   scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-snap-type: x mandatory;
@@ -809,4 +824,6 @@ nav.scrolled { border-color: var(--border-2); }
   .board-stage { height: 320px; }
   .gc-5, .gc-6 { display: none; }
   .hero-title { font-size: clamp(2.6rem, 11vw, 3.5rem); }
+  /* Narrower cards on small screens so ~1.5 are visible, hinting at scroll */
+  .shot-frame { width: 165px; border-radius: 22px; }
 }
