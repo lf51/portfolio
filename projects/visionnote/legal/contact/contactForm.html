@@ -7,6 +7,7 @@
   <meta name="description" content="Get in touch with the VisionNote developer. Questions, feedback, or support requests.">
   <meta name="robots" content="noindex">
   <link rel="stylesheet" href="../../../../style/legal-style.css">
+  <link rel="stylesheet" href="../../style/visionnote-legal.css">
   <style>
     .container { text-align: center; }
     .email-link {
@@ -29,9 +30,26 @@
       text-decoration: none;
       transform: translateY(-1px);
     }
+    .legal-links { justify-content: center; }
   </style>
 </head>
 <body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="../../visionnoteIndex.html" class="nav-back">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Home
+      </a>
+      <a href="../../visionnoteIndex.html" class="nav-brand">
+        <div class="nav-logo" aria-hidden="true">V</div>
+        <span>VisionNote</span>
+      </a>
+    </div>
+  </nav>
+
   <main class="container">
     <h1>Contact</h1>
     <p>Have questions, feedback, or need support with VisionNote?<br />We're happy to hear from you.</p>
@@ -39,15 +57,23 @@
       Send email
     </a>
 
-    <footer>
-      <p>
-        <a href="../../visionnoteIndex.html">Home</a> &nbsp;·&nbsp;
-        <a href="../privacy/privacyIndex.html">Privacy Policy</a> &nbsp;·&nbsp;
-        <a href="../terms/termsIndex.html">Terms of Service</a> &nbsp;·&nbsp;
-        <a href="../faq/faqIndex.html">FAQ</a>
-      </p>
-      <p>© VisionNote — All rights reserved</p>
+    <div class="legal-links">
+      <a href="../privacy/privacyIndex.html">Privacy Policy</a>
+      <span aria-hidden="true">·</span>
+      <a href="../terms/termsIndex.html">Terms of Service</a>
+      <span aria-hidden="true">·</span>
+      <a href="../faq/faqIndex.html">FAQ</a>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <div class="footer-logo" aria-hidden="true">V</div>
+        <span>VisionNote</span>
+      </div>
+      <p>Built by <a href="../../../../index.html">Calogero Friscia</a></p>
+      <p class="copy">© 2026 VisionNote — All rights reserved</p>
     </footer>
   </main>
+
 </body>
 </html>

@@ -1,0 +1,121 @@
+/* Nav bar — replica di visionnoteIndex.html */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  z-index: 100;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(8,8,16,0.88);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.nav-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(240,240,248,0.5);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: #f0f0f8; text-decoration: none; }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+}
+.nav-logo {
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #E8A82C 0%, rgba(232,168,44,0.5) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #080810;
+}
+.nav-brand span {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #f0f0f8;
+  letter-spacing: -0.01em;
+}
+
+/* Secondary legal nav — links to sibling pages (current page omitted) */
+.legal-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.85rem;
+}
+.legal-links a {
+  color: rgba(240,240,248,0.45);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.legal-links a:hover { color: #f0f0f8; }
+.legal-links span { color: rgba(255,255,255,0.15); }
+
+/* Site footer — replica di visionnoteIndex.html */
+.site-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+  /* reset the legal-style.css generic footer rules */
+  font-size: inherit;
+  color: inherit;
+}
+.site-footer .footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-bottom: 0.9rem;
+}
+.site-footer .footer-logo {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #E8A82C 0%, rgba(232,168,44,0.5) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #080810;
+}
+.site-footer .footer-brand span {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f0f0f8;
+}
+.site-footer p {
+  font-size: 0.855rem;
+  color: rgba(240,240,248,0.45);
+  margin-bottom: 0.4rem;
+}
+.site-footer p.copy {
+  font-size: 0.76rem;
+  color: rgba(240,240,248,0.25);
+  margin-bottom: 0;
+}
+.site-footer a { color: #0a84ff; }
+.site-footer a:hover { text-decoration: underline; }
