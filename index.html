@@ -383,6 +383,29 @@
       color: var(--muted);
     }
 
+    .status-soon {
+      background: rgba(255, 179, 64, 0.1);
+      border: 1px solid rgba(255, 179, 64, 0.28);
+      color: #ffb340;
+    }
+
+    .project-icon-letter {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #1a1428, #2a1f40);
+      border: 1px solid rgba(255, 179, 64, 0.25);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffb340;
+      letter-spacing: -0.02em;
+    }
+
     .project-tags {
       display: flex;
       flex-wrap: wrap;
@@ -615,6 +638,32 @@
       <h2 class="section-title">Selected Projects</h2>
 
       <div class="project-grid">
+
+        <!-- VisionNote -->
+        <div class="project-card animate-in">
+          <div class="project-header">
+            <div class="project-icon-letter" aria-hidden="true">V</div>
+            <div class="project-meta">
+              <div class="project-name">VisionNote — Find Your True North</div>
+              <div class="project-subtitle">A daily ritual for clarity and intentional living — iPhone, iPad, Mac</div>
+            </div>
+            <span class="project-status status-soon">Soon</span>
+          </div>
+          <div class="project-tags">
+            <span class="tag">SwiftUI</span>
+            <span class="tag">SwiftData</span>
+            <span class="tag">WidgetKit</span>
+            <span class="tag">MVVM</span>
+            <span class="tag">App Groups</span>
+            <span class="tag">iOS 17+</span>
+          </div>
+          <div class="project-links">
+            <a href="projects/visionnote/visionnoteIndex.html" target="_blank" class="project-link">
+              Project Page
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
 
         <!-- Unison -->
         <div class="project-card animate-in">
